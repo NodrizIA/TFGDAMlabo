@@ -26,3 +26,14 @@ jobs:
         context: .
         push: true
         tags: nodrizia/mi-app-flask:latest
+    - name: 4. Desplegar en AWS
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.AWS_HOST }}
+        username: ubuntu
+        key: ${{ secrets.AWS_SSH_KEY }}
+        script: |
+          sudo docker pull TU_USUARIO_DOCKER/mi-app-flask:latest
+          sudo docker stop app-flask || true
+          sudo docker rm app-flask || true
+          sudo docker run -d --name app-flask -p 5000:5000 nodrizia/mi-app-flask:latest
