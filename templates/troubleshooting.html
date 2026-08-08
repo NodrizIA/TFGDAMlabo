@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asistente de laboratorio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilo_lab.css') }}">
+</head>
+<body class="bg-light">
+
+    <nav class="navbar navbar-dark bg-dark px-3 mb-4">
+        <span class="navbar-brand">Asistente de problemas</span>
+        <div>
+            <a href="{{ url_for('panel_tecnico') }}" class="btn btn-outline-light btn-sm me-2">Volver al panel</a>
+            <a href="{{ url_for('logout') }}" class="btn btn-outline-danger btn-sm">Salir</a>
+        </div>
+    </nav>
+
+    <main class="container">
+        {% with mensajes = get_flashed_messages(with_categories=true) %}
+            {% if mensajes %}
+                <div class="mx-auto troubleshooting-card mb-3">
+                    {% for categoria, mensaje in mensajes %}
+                        <div class="alert alert-{{ categoria }} mb-2">{{ mensaje }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <div class="card shadow-lg text-center mx-auto troubleshooting-card">
+            <div class="card-header bg-primary text-white">
+                {{ paso.titulo | default('Guía interactiva') }}
+            </div>
+            <div class="card-body p-5">
+                <h4 class="card-title mb-4">{{ paso.texto }}</h4>
+
+                {% if paso.conclusion %}
+                    {% set criticidad = paso.criticidad | default('media') %}
+                    <div class="alert alert-info">
+                        Has llegado al final del diagnóstico.
+                    </div>
+                    <p class="badge text-bg-secondary mb-4">Criticidad: {{ criticidad }}</p>
+
+                    {% if paso.permite_imagenes %}
+                        <div class="text-start imagenes-panel mb-4">
+                            {% if imagenes %}
+                                <div class="imagenes-grid">
+                                    {% for imagen in imagenes %}
+                                        <a href="{{ url_for('static', filename=imagen) }}" target="_blank" class="imagen-subida">
+                                            <img src="{{ url_for('static', filename=imagen) }}" alt="Imagen subida en {{ paso.titulo }}">
+                                        </a>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                <p class="text-muted mb-0">Todavia no hay imagenes subidas en este apartado.</p>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+
+                    <div class="d-flex flex-column flex-sm-row justify-content-center gap-2">
+                        <a href="{{ url_for('panel_tecnico') }}" class="btn btn-success btn-lg">Entendido</a>
+                        <a href="{{ url_for('troubleshooting') }}" class="btn btn-outline-primary btn-lg">Nueva consulta</a>
+                    </div>
+                {% else %}
+                    <p class="text-muted mb-4">Selecciona una opción:</p>
+                    <div class="d-grid gap-3">
+                        {% for opcion in paso.opciones %}
+                            <a href="{{ url_for('troubleshooting', id_paso=opcion.siguiente_paso) }}" class="btn btn-outline-primary btn-lg">
+                                {{ opcion.respuesta }}
+                            </a>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>

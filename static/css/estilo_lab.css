@@ -1,0 +1,114 @@
+body {
+    background-color: #f4f6f8;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+}
+
+.navbar {
+    background: linear-gradient(90deg, #006064 0%, #00838f 100%) !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    font-weight: 600;
+    letter-spacing: 0.2px;
+}
+
+.card {
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+.card-header {
+    background-color: #e0f7fa !important;
+    color: #006064 !important;
+    font-weight: 700;
+    border-bottom: 1px solid #b2ebf2;
+}
+
+.btn-primary {
+    background-color: #00838f;
+    border-color: #00838f;
+    border-radius: 8px;
+    padding: 10px 20px;
+}
+
+.btn-primary:hover {
+    background-color: #006064;
+    border-color: #006064;
+}
+
+.btn-outline-primary {
+    color: #00838f;
+    border-color: #00838f;
+}
+
+.btn-outline-primary:hover {
+    background-color: #00838f;
+    color: #fff;
+}
+
+.alert-success {
+    background-color: #e8f5e9;
+    border-left: 5px solid #2e7d32;
+    color: #1b5e20;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    color: #006064;
+}
+
+.login-body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+.login-card {
+    width: min(100%, 380px);
+}
+
+.troubleshooting-card {
+    max-width: 680px;
+}
+
+.badge {
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.imagenes-panel {
+    border-top: 1px solid #e0f2f1;
+    padding-top: 20px;
+}
+
+.imagenes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 12px;
+}
+
+.imagen-subida {
+    display: block;
+    aspect-ratio: 1 / 1;
+    border: 1px solid #d8e8ea;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+}
+
+.imagen-subida img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}

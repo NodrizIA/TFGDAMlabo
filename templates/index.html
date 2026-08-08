@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LabAssistant | Inicio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilo_lab.css') }}">
+</head>
+<body class="bg-light">
+
+    <nav class="navbar navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url_for('index') }}">LabAssistant TFG</a>
+            <a class="btn btn-light" href="{{ url_for('login') }}">Acceso profesionales</a>
+        </div>
+    </nav>
+
+    <main class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-7 col-lg-6">
+                {% with mensajes = get_flashed_messages(with_categories=true) %}
+                    {% if mensajes %}
+                        {% for categoria, mensaje in mensajes %}
+                            <div class="alert alert-{{ categoria }} text-center">{{ mensaje }}</div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+
+                <div class="card shadow">
+                    <div class="card-header bg-white">
+                        <h4 class="text-center text-primary mb-0">Interpretación de resultados</h4>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-muted text-center">Introduce un valor para obtener una interpretación preliminar.</p>
+
+                        <form action="{{ url_for('analizar') }}" method="POST">
+                            <div class="mb-3">
+                                <label for="parametro" class="form-label">Parámetro</label>
+                                <select id="parametro" class="form-select" name="parametro" required>
+                                    {% for parametro in parametros %}
+                                        <option value="{{ parametro.nombre }}">
+                                            {{ parametro.nombre }} ({{ parametro.min_ref }} - {{ parametro.max_ref }})
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="valor" class="form-label">Resultado</label>
+                                <input id="valor" type="number" step="0.01" class="form-control" name="valor" placeholder="Ej: 95" required>
+                            </div>
+
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary btn-lg">Analizar muestra</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>
