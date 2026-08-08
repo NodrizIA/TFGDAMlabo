@@ -33,7 +33,7 @@ jobs:
         username: ubuntu
         key: ${{ secrets.AWS_SSH_KEY }}
         script: |
-          sudo docker pull TU_USUARIO_DOCKER/mi-app-flask:latest
+          sudo docker pull nodrizia/mi-app-flask:latest
           sudo docker stop app-flask || true
           sudo docker rm app-flask || true
           sudo docker run -d --name app-flask -p 5000:5000 nodrizia/mi-app-flask:latest
