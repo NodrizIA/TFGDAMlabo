@@ -35,16 +35,29 @@
                         <p class="text-muted text-center">Introduce un valor para obtener una interpretación preliminar.</p>
 
                         <form action="{{ url_for('analizar') }}" method="POST">
+                            
                             <div class="mb-3">
                                 <label for="parametro" class="form-label">Parámetro</label>
                                 <select id="parametro" class="form-select" name="parametro" required>
                                     {% for parametro in parametros %}
+                                        <!-- Hemos quitado los min_ref y max_ref antiguos para evitar errores de Jinja2 -->
                                         <option value="{{ parametro.nombre }}">
-                                            {{ parametro.nombre }} ({{ parametro.min_ref }} - {{ parametro.max_ref }})
+                                            {{ parametro.nombre }}
                                         </option>
                                     {% endfor %}
                                 </select>
                             </div>
+
+                            <!-- NUEVO SELECTOR DE SEXO -->
+                            <div class="mb-3">
+                                <label for="sexo" class="form-label">Sexo del paciente</label>
+                                <select id="sexo" class="form-select" name="sexo" required>
+                                    <option value="" disabled selected>Selecciona una opción...</option>
+                                    <option value="M">Hombre</option>
+                                    <option value="F">Mujer</option>
+                                </select>
+                            </div>
+                            <!-- FIN DEL NUEVO SELECTOR -->
 
                             <div class="mb-3">
                                 <label for="valor" class="form-label">Resultado</label>

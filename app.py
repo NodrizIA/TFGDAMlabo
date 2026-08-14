@@ -40,8 +40,9 @@ def conectar_bd():
 
 def listar_parametros():
     with conectar_bd() as conn:
+        # ACTUALIZADO: Solo pedimos el nombre, ya que los mínimos y máximos ahora dependen del sexo
         return conn.execute(
-            "SELECT nombre, min_ref, max_ref FROM parametros ORDER BY nombre"
+            "SELECT nombre FROM parametros ORDER BY nombre"
         ).fetchall()
 
 
@@ -62,11 +63,19 @@ def index():
 def analizar():
     parametro_usuario = request.form.get("parametro", "").strip()
     valor_usuario = request.form.get("valor", "").strip()
+    
+    # NUEVO: Capturamos el sexo del formulario HTML
+    sexo_usuario = request.form.get("sexo", "").strip() 
 
     try:
         valor = float(valor_usuario)
     except ValueError:
         flash("Introduce un valor numérico válido.", "danger")
+        return redirect(url_for("index"))
+        
+    # NUEVO: Validamos que haya seleccionado un sexo
+    if sexo_usuario not in ["M", "F"]:
+        flash("Por favor, selecciona el sexo del paciente.", "danger")
         return redirect(url_for("index"))
 
     datos_db = obtener_parametro_bd(parametro_usuario)
@@ -74,9 +83,15 @@ def analizar():
         flash("Todavía no hay información para ese parámetro.", "warning")
         return redirect(url_for("index"))
 
-    minimo = datos_db["min_ref"]
-    maximo = datos_db["max_ref"]
+    # NUEVO: Lógica de separación por sexos
+    if sexo_usuario == 'M':
+        minimo = datos_db["min_ref_m"]
+        maximo = datos_db["max_ref_m"]
+    else:
+        minimo = datos_db["min_ref_f"]
+        maximo = datos_db["max_ref_f"]
 
+    # La evaluación ahora es independiente del sexo, usa el minimo y maximo calculados arriba
     if valor < minimo:
         estado = "bajo"
         mensaje = datos_db["mensaje_bajo"]
@@ -97,6 +112,8 @@ def analizar():
         estado=estado,
         mensaje=mensaje,
         color_alerta=color_alerta,
+        rango_min=minimo, # Le pasamos los rangos a la vista por si quieres mostrarlos
+        rango_max=maximo
     )
 
 

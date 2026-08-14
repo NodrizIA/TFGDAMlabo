@@ -24,43 +24,43 @@ arbol_decision = {
         "titulo": "Valores de referencia, avisos y criticos",
         "texto": "Selecciona el area que quieres consultar.",
         "opciones": [
-            {"respuesta": "hematologiavalores", "siguiente_paso": "hematologiavalores"},
-            {"respuesta": "bioquimicavalores", "siguiente_paso": "bioquimicavalores"},
-            {"respuesta": "gasesvalores", "siguiente_paso": "gasesvalores"},
-            {"respuesta": "orinavalores", "siguiente_paso": "orinavalores"},
-            {"respuesta": "coagulacionvalores", "siguiente_paso": "coagulacionvalores"},
+            {"respuesta": "hematologia valores", "siguiente_paso": "hematologia valores"},
+            {"respuesta": "bioquimica valores", "siguiente_paso": "bioquimica valores"},
+            {"respuesta": "gases valores", "siguiente_paso": "gases valores"},
+            {"respuesta": "orina valores", "siguiente_paso": "orina valores"},
+            {"respuesta": "coagulacion valores", "siguiente_paso": "coagulacion valores"},
         ],
     },
-    "hematologiavalores": {
-        "titulo": "hematologiavalores",
+    "hematologia valores": {
+        "titulo": "hematologia valores",
         "texto": "Apartado de valores de referencia, avisos y criticos de Hematologia.",
         "criticidad": "media",
         "permite_imagenes": True,
         "conclusion": True,
     },
-    "bioquimicavalores": {
-        "titulo": "bioquimicavalores",
+    "bioquimica valores": {
+        "titulo": "bioquimica valores",
         "texto": "Apartado de valores de referencia, avisos y criticos de Bioquimica.",
         "criticidad": "media",
         "permite_imagenes": True,
         "conclusion": True,
     },
-    "gasesvalores": {
-        "titulo": "gasesvalores",
+    "gases valores": {
+        "titulo": "gases valores",
         "texto": "Apartado de valores de referencia, avisos y criticos de Gases.",
         "criticidad": "media",
         "permite_imagenes": True,
         "conclusion": True,
     },
-    "orinavalores": {
-        "titulo": "orinavalores",
+    "orina valores": {
+        "titulo": "orina valores",
         "texto": "Apartado de valores de referencia, avisos y criticos de Orina.",
         "criticidad": "media",
         "permite_imagenes": True,
         "conclusion": True,
     },
-    "coagulacionvalores": {
-        "titulo": "coaguvalores",
+    "coagulacion valores": {
+        "titulo": "coagulacion valores",
         "texto": "Apartado de valores de referencia, avisos y criticos de Coagulacion.",
         "criticidad": "media",
         "permite_imagenes": True,

@@ -25,7 +25,15 @@
                     <div class="card-body">
                         <h5 class="card-title">Parámetro: {{ parametro.nombre }}</h5>
                         <p class="card-text mb-1">Valor introducido: <strong>{{ valor }}</strong></p>
-                        <p class="text-muted">Intervalo de referencia: {{ parametro.min_ref }} - {{ parametro.max_ref }}</p>
+                        <p>
+                             <strong>Tu resultado:</strong> 
+                                 {{ valor }} {{ parametro.unidades }}
+                        </p>
+                        <p>
+                            <strong>Intervalo de referencia:</strong> 
+                            {{ rango_min }} - {{ rango_max }} {{ parametro.unidades }}
+                        </p>
+                        
 
                         <hr>
 
